@@ -1,0 +1,17 @@
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\bin\Debug\Crud_TBD.exe.config
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\bin\Debug\Crud_TBD.exe
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\bin\Debug\Crud_TBD.pdb
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.csprojResolveAssemblyReference.cache
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.Properties.Resources.resources
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.csproj.GenerateResource.Cache
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.exe
+E:\Documentos_escuela\Graficacion_proyectos\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.pdb
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\bin\Debug\Crud_TBD.exe.config
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.exe
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.pdb
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\bin\Debug\Crud_TBD.exe
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\bin\Debug\Crud_TBD.pdb
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.csprojResolveAssemblyReference.cache
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.Principal.resources
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.Properties.Resources.resources
+E:\Documentos_escuela\Repositorios_GIT\Crud_TBD\Crud_TBD\obj\Debug\Crud_TBD.csproj.GenerateResource.Cache
