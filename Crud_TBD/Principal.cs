@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Odbc;
 
 namespace Crud_TBD
 {
@@ -16,6 +17,8 @@ namespace Crud_TBD
         {
             InitializeComponent();
         }
+
+
         
         /// <summary>
         /// Método que actualiza algun campo seleccioando de la tabla.

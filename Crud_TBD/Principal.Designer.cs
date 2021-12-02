@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxEleccion = new System.Windows.Forms.ComboBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -56,7 +57,6 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tablaRegistros = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBoxEleccion = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +97,19 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(2);
             this.panel1.Size = new System.Drawing.Size(255, 592);
             this.panel1.TabIndex = 0;
+            // 
+            // comboBoxEleccion
+            // 
+            this.comboBoxEleccion.FormattingEnabled = true;
+            this.comboBoxEleccion.Items.AddRange(new object[] {
+            "Libros",
+            "Revistas",
+            "Investigaciones",
+            "Software"});
+            this.comboBoxEleccion.Location = new System.Drawing.Point(12, 546);
+            this.comboBoxEleccion.Name = "comboBoxEleccion";
+            this.comboBoxEleccion.Size = new System.Drawing.Size(238, 31);
+            this.comboBoxEleccion.TabIndex = 26;
             // 
             // textBox11
             // 
@@ -314,19 +327,6 @@
             this.tablaRegistros.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tablaRegistros.Size = new System.Drawing.Size(200, 100);
             this.tablaRegistros.TabIndex = 1;
-            // 
-            // comboBoxEleccion
-            // 
-            this.comboBoxEleccion.FormattingEnabled = true;
-            this.comboBoxEleccion.Items.AddRange(new object[] {
-            "Libros",
-            "Revistas",
-            "Investigaciones",
-            "Software"});
-            this.comboBoxEleccion.Location = new System.Drawing.Point(12, 546);
-            this.comboBoxEleccion.Name = "comboBoxEleccion";
-            this.comboBoxEleccion.Size = new System.Drawing.Size(238, 31);
-            this.comboBoxEleccion.TabIndex = 26;
             // 
             // Principal
             // 
