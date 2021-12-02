@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxEleccion = new System.Windows.Forms.ComboBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -55,9 +57,9 @@
             this.btnActualizar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tablaRegistros = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBoxEleccion = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -97,6 +99,22 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(2);
             this.panel1.Size = new System.Drawing.Size(255, 592);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // comboBoxEleccion
+            // 
+            this.comboBoxEleccion.DisplayMember = "Libros";
+            this.comboBoxEleccion.FormattingEnabled = true;
+            this.comboBoxEleccion.Items.AddRange(new object[] {
+            "Libros",
+            "Revistas",
+            "Investigaciones",
+            "Software"});
+            this.comboBoxEleccion.Location = new System.Drawing.Point(12, 546);
+            this.comboBoxEleccion.Name = "comboBoxEleccion";
+            this.comboBoxEleccion.Size = new System.Drawing.Size(238, 31);
+            this.comboBoxEleccion.TabIndex = 26;
+            this.comboBoxEleccion.Click += new System.EventHandler(this.comboBoxEleccion_Click);
             // 
             // textBox11
             // 
@@ -302,31 +320,17 @@
             this.label1.TabIndex = 0;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // tablaRegistros
+            // dataGridView1
             // 
-            this.tablaRegistros.ColumnCount = 2;
-            this.tablaRegistros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablaRegistros.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablaRegistros.Location = new System.Drawing.Point(286, 11);
-            this.tablaRegistros.Name = "tablaRegistros";
-            this.tablaRegistros.RowCount = 2;
-            this.tablaRegistros.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablaRegistros.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tablaRegistros.Size = new System.Drawing.Size(200, 100);
-            this.tablaRegistros.TabIndex = 1;
-            // 
-            // comboBoxEleccion
-            // 
-            this.comboBoxEleccion.FormattingEnabled = true;
-            this.comboBoxEleccion.Items.AddRange(new object[] {
-            "Libros",
-            "Revistas",
-            "Investigaciones",
-            "Software"});
-            this.comboBoxEleccion.Location = new System.Drawing.Point(12, 546);
-            this.comboBoxEleccion.Name = "comboBoxEleccion";
-            this.comboBoxEleccion.Size = new System.Drawing.Size(238, 31);
-            this.comboBoxEleccion.TabIndex = 26;
+            dataGridViewCellStyle1.NullValue = "NULL";
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(266, 15);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(1);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1527, 564);
+            this.dataGridView1.TabIndex = 1;
             // 
             // Principal
             // 
@@ -335,20 +339,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(1242, 596);
-            this.Controls.Add(this.tablaRegistros);
+            this.ClientSize = new System.Drawing.Size(1796, 596);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.MaximumSize = new System.Drawing.Size(1258, 635);
-            this.MinimumSize = new System.Drawing.Size(1258, 635);
             this.Name = "Principal";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro";
             this.Load += new System.EventHandler(this.Principal_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,8 +385,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.TableLayoutPanel tablaRegistros;
         private System.Windows.Forms.ComboBox comboBoxEleccion;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
