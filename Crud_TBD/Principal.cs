@@ -53,10 +53,14 @@ namespace Crud_TBD
             // Setear al comando como lo que se recibio, es decir un procedimiento almacenado.
             comando.CommandType = CommandType.StoredProcedure;
 
+            // Limpiar los parametros
+            comando.Parameters.Clear();
+
             // Meter los datos al procedimiento
             for (int i = 0; i < campos.Length; i++)
             {
-                comando.Parameters.AddWithValue(campos[i], textBoxes[i].Text);
+                comando.Parameters.AddWithValue(campos[i], textBoxes[i].Text.ToString());
+                System.Console.Write(campos[i] + " " + textBoxes[i].Text.ToString() + " ");
             }
 
             // Ejecutar el procedimiento y guardar si se puedo ejecutar
@@ -73,8 +77,9 @@ namespace Crud_TBD
             // refrescar la vista de la tabla.
             mostrarTabla();
 
-            // Limpiar los parametros
-            comando.Parameters.Clear();
+            // Limpiar los campos
+            limpiar();
+
         }
 
         /// <summary>
@@ -94,10 +99,14 @@ namespace Crud_TBD
             // Setear al comando como lo que se recibio, es decir un procedimiento almacenado.
             comando.CommandType = CommandType.StoredProcedure;
 
+            // Limpiar los parametros
+            comando.Parameters.Clear();
+
             // Meter los datos al procedimiento
             for (int i = 0; i < campos.Length; i++)
             {
-                comando.Parameters.AddWithValue(campos[i], textBoxes[i].Text);
+                comando.Parameters.AddWithValue(campos[i], textBoxes[i].Text.ToString() );
+                System.Console.Write(campos[i] + " " +textBoxes[i].Text.ToString() + " ");
             }
 
             // Ejecutar el procedimiento y guardar si se puedo ejecutar
@@ -114,15 +123,28 @@ namespace Crud_TBD
             // refrescar la vista de la tabla.
             mostrarTabla();
 
-            // Limpiar los parametros
-            comando.Parameters.Clear();
+            // Limpiar los campos
+            limpiar();
+
+            
         }
 
-       /// <summary>
-       /// Método que cuando carga la pantalla principal carga la base de datos.
-       /// </summary>
-       /// <param name="sender"></param>
-       /// <param name="e"></param>
+        /// <summary>
+        /// Método que limpia los campos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            // Limpiar los campos
+            limpiar();
+        }
+
+        /// <summary>
+        /// Método que cuando carga la pantalla principal carga la base de datos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Principal_Load(object sender, EventArgs e)
         {
             // Inicar la conexión
@@ -161,6 +183,8 @@ namespace Crud_TBD
                     label9.Text = "Edicion";
                     label10.Text = "Genero";
 
+                    // Colocar el encabezado del registro
+                    label13.Text = "Registro Libros";
 
                     // Desaparecer el label 11 y el campo de texto.
                     label11.Visible = false;
@@ -218,6 +242,9 @@ namespace Crud_TBD
                     label10.Text = "Primer apellido";
                     label11.Text = "Segundo apellido";
 
+                    // Colocar el encabezado del registro
+                    label13.Text = "Registro Revistas";
+
                     // Aparecer el label 10 y 11 junto con los campos de texto si es que quitaron.
                     label9.Visible = true;
                     label10.Visible = true;
@@ -238,7 +265,7 @@ namespace Crud_TBD
                     campos[2] = "p_Nombre_Revista";
                     campos[3] = "p_Anio_Revista";
                     campos[4] = "p_Editorial_Revista";
-                    campos[5] = "p_2Ciudad_Revista";
+                    campos[5] = "p_Ciudad_Revista";
                     campos[6] = "p_Volumen_Revista";
                     campos[7] = "p_Numero_Revista";
                     campos[8] = "p_Nombre_Autor_Revista";
@@ -272,6 +299,9 @@ namespace Crud_TBD
                     label8.Text = "Edicion";
                     label9.Text = "Finalizacion";
 
+                    // Colocar el encabezado del registro
+                    label13.Text = "Registro Investigaciones";
+
                     // Desaparecer el label 10 y 11 junto los campos de texto.
                     label10.Visible = false;
                     label11.Visible = false;
@@ -295,7 +325,7 @@ namespace Crud_TBD
                     campos[4] = "p_Nombre_Autor_Principal";
                     campos[5] = "p_Apellido_Paterno_Autor_Principal";
                     campos[6] = "p_Apellido_Materno_Autor_Principal";
-                    campos[7] = "p_Edicion_Investigacion,Fecha_Terminacion_Investigacion";
+                    campos[7] = "p_Edicion_Investigacion";
                     campos[8] = "p_Fecha_Terminacion_Investigacion";
 
                     llenarTextBoxes9();
@@ -323,6 +353,9 @@ namespace Crud_TBD
                     label7.Text = "Tipo";
                     label8.Text = "Compatibilidad";
 
+                    // Colocar el encabezado del registro
+                    label13.Text = "Registro Software";
+
                     // Desaparecer el label 9, 10 y 11 junto los campos de texto.
                     label9.Visible = false;
                     label10.Visible = false;
@@ -344,7 +377,7 @@ namespace Crud_TBD
                     campos[4] = "p_Fecha_Lanzamiento";
                     campos[5] = "p_Version_Software";
                     campos[6] = "p_Tipo_Software";
-                    campos[7] = "p_Compatibilidad_SO ";
+                    campos[7] = "p_Compatibilidad_SO";
 
                     llenarTextBoxes8();
 
@@ -412,12 +445,27 @@ namespace Crud_TBD
              int id = Convert.ToInt32(fila.Cells[0].Value);
             textBoxes[0].Text = id.ToString();
 
+            string comparador;
+
+            // fecha auxiliar
+            DateTime fechaAux = new DateTime(2001,01,01);
+
             // Poner los datos seleccionados despues del ID.
             for (int i = 1; i < campos.Length; i ++)
             {
-                // Coloar el texto dependiendo en que tenga.
-                textBoxes[i].Text = fila.Cells[i].Value.ToString();
-                System.Console.WriteLine( fila.Cells[i].Value.ToString() );
+                comparador = campos[i].ToString().ToLower();
+                if (comparador.Contains("fecha") )
+                {
+                    fechaAux = Convert.ToDateTime(fila.Cells[i].Value);
+                    textBoxes[i].Text = fechaAux.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    // Coloar el texto dependiendo en que tenga.
+                    textBoxes[i].Text = fila.Cells[i].Value.ToString();
+                    System.Console.WriteLine(fila.Cells[i].Value.ToString());
+                }
+                
             }
         }
 
@@ -515,9 +563,57 @@ namespace Crud_TBD
 
         }
 
+        /// <summary>
+        /// Método que cuando se de click a la tabla, seleccione la fila.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             seleccionarFila();
+        }
+
+        /// <summary>
+        /// Método para eliminar algun dato seleccionado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            // Preparar la conexión para así tener el comando
+            comando.Connection = conectador.getConnection();
+            conexión = conectador.getConnection();
+
+            // Conseguir el tipo de consulta que se selecciono
+            comando.CommandText = seleccionarEliminar;
+
+            // Setear al comando como lo que se recibio, es decir un procedimiento almacenado.
+            comando.CommandType = CommandType.StoredProcedure;
+
+            // Limpiar los parametros
+            comando.Parameters.Clear();
+
+            // Meter los datos al procedimiento
+            comando.Parameters.AddWithValue(campos[0], textBoxes[0].Text.ToString());
+
+            // Ejecutar el procedimiento y guardar si se puedo ejecutar
+            int respuesta = comando.ExecuteNonQuery();
+
+            if (respuesta > 0)
+            {
+                // si se ejecuto entonces es mayor a 0 y si se guardaron los datos.
+                MessageBox.Show("Los datos han sido borrados");
+            }
+            else
+                MessageBox.Show("Error no se han borrados los datos!");
+
+            // refrescar la vista de la tabla.
+            mostrarTabla();
+
+            // Limpiar los campos
+            limpiar();
+
+
         }
     }
 }
