@@ -22,6 +22,7 @@ namespace Crud_TBD
         private readonly ComboBox seleccion = new ComboBox();
         private MySqlCommand comando = new MySqlCommand();
         MySqlDataReader leerFilas;
+        private TextBox[] textBoxes;
 
         // Seleccionadores de los procedimientos
         private string seleccionConsulta;
@@ -53,7 +54,7 @@ namespace Crud_TBD
         {
             // Inicar la conexión
             conexión = conectador.getConnection();
-            
+
 
         }
 
@@ -75,6 +76,35 @@ namespace Crud_TBD
                 case "Libros":
                     System.Console.WriteLine("Se selecciono: " + seleccionTabla);
 
+                    // Colocar las etiquetas con su respectivo campo
+                    label1.Text = "Id";
+                    label2.Text = "ISBD";
+                    label3.Text = "Titulo";
+                    label4.Text = "Nombre";
+                    label5.Text = "Primer Apellido";
+                    label6.Text = "Segundo Apellido";
+                    label7.Text = "Fecha";
+                    label8.Text = "Editorial";
+                    label9.Text = "Edicion";
+                    label10.Text = "Genero";
+
+
+                    // Desaparecer el label 11 y el campo de texto.
+                    label11.Visible = false;
+                    textBox11.Visible = false;
+
+                    // Aparecer el label 10 junto con el campo de texto si es que quitaron.
+                    label9.Visible = true;
+                    label10.Visible = true;
+                    textBox9.Visible = true;
+                    textBox10.Visible = true;
+
+                    // Crear el arreglo de textBoxes correspondiente al tamaño de Libros
+                    textBoxes = new TextBox[10];
+
+                    // Llenar el arreglo con su respectivo tamaño
+                    llenarTextBoxes10();
+
                     // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla libros.
                     seleccionConsulta = "consultaLibros";
                     seleccionGuardar = "insertarLibros";
@@ -87,6 +117,34 @@ namespace Crud_TBD
 
 
                 case "Revistas":
+
+                    // Colocar las etiquetas con su respectivo campo
+                    label1.Text = "Id";
+                    label2.Text = "ISBD";
+                    label3.Text = "Nombre";
+                    label4.Text = "Año";
+                    label5.Text = "Editorial";
+                    label6.Text = "Ciudad";
+                    label7.Text = "Volumen";
+                    label8.Text = "Numero";
+                    label9.Text = "Autor";
+                    label10.Text = "Primer apellido";
+                    label11.Text = "Segundo apellido";
+
+                    // Aparecer el label 10 y 11 junto con los campos de texto si es que quitaron.
+                    label9.Visible = true;
+                    label10.Visible = true;
+                    label11.Visible = true;
+                    textBox9.Visible = true;
+                    textBox10.Visible = true;
+                    textBox11.Visible = true;
+
+
+                    // Crear el arreglo de textBoxes correspondiente al tamaño de Revistas
+                    textBoxes = new TextBox[11];
+
+                    llenarTextBoxes11();
+
                     System.Console.WriteLine("Se selecciono: " + seleccionTabla);
 
                     // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla revistas.
@@ -101,9 +159,77 @@ namespace Crud_TBD
 
 
                 case "Investigaciones":
+                    // Colocar las etiquetas con su respectivo campo
+                    label1.Text = "Id";
+                    label2.Text = "ISBD";
+                    label3.Text = "Nombre";
+                    label4.Text = "Año";
+                    label5.Text = "Editorial";
+                    label6.Text = "Ciudad";
+                    label7.Text = "Volumen";
+                    label8.Text = "Numero";
+                    label9.Text = "Autor";
+
+                    // Desaparecer el label 10 y 11 junto los campos de texto.
+                    label10.Visible = false;
+                    label11.Visible = false;
+                    textBox10.Visible = false;
+                    textBox11.Visible = false;
+
+                    // Por si se desaparece el label 9 con su respectivo campo de texto.
+                    label9.Visible = true;
+                    textBox9.Visible = true;
+
+                    // Crear el arreglo de textBoxes correspondiente al tamaño de Revistas
+                    textBoxes = new TextBox[9];
+
+                    llenarTextBoxes9();
+
+                    // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla Investigaciones.
+                    seleccionConsulta = "consultaInvestigaciones";
+                    seleccionGuardar = "insertarInvestigaciones";
+                    seleccionActualizar = "modificarInvestigaciones";
+                    seleccionarEliminar = "bajaInvestigaciones";
+
+                    // De último mostrar la tabla en si
+                    mostrarTabla();
+
                     System.Console.WriteLine("Se selecciono: " + seleccionTabla);
                     break;
                 case "Software":
+
+                    // Colocar las etiquetas con su respectivo campo
+                    label1.Text = "Id";
+                    label2.Text = "Nombre";
+                    label3.Text = "Empresa";
+                    label4.Text = "Derrollador(a)";
+                    label5.Text = "Lanzamiento";
+                    label6.Text = "Version";
+                    label7.Text = "Tipo";
+                    label8.Text = "Compatibilidad";
+
+                    // Desaparecer el label 9, 10 y 11 junto los campos de texto.
+                    label9.Visible = false;
+                    label10.Visible = false;
+                    label11.Visible = false;
+                    textBox9.Visible = false;
+                    textBox10.Visible = false;
+                    textBox11.Visible = false;
+
+                    // Crear el arreglo de textBoxes correspondiente al tamaño de Revistas
+                    textBoxes = new TextBox[8];
+
+                    llenarTextBoxes8();
+
+                    // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla Investigaciones.
+                    seleccionConsulta = "consultaSoftware";
+                    seleccionGuardar = "insertarSoftware";
+                    seleccionActualizar = "modificarSoftware";
+                    seleccionarEliminar = "bajaSoftware";
+
+                    // De último mostrar la tabla en si
+                    mostrarTabla();
+
                     System.Console.WriteLine("Se selecciono: " + seleccionTabla);
                     break;
 
@@ -125,7 +251,7 @@ namespace Crud_TBD
             conexión = conectador.getConnection();
 
             // Conseguir el tipo de consulta que se selecciono
-            comando.CommandText = seleccionConsulta;
+            comando.CommandText =  seleccionConsulta;
 
             // Setear al comando como lo que se recibio, es decir un procedimiento almacenado.
             comando.CommandType = CommandType.StoredProcedure;
@@ -163,6 +289,76 @@ namespace Crud_TBD
             textBox9.ResetText();
             textBox10.ResetText();
             textBox11.ResetText();
+        }
+
+        /// <summary>
+        /// Método que llenta el arreglo de text boxes cuando este tiene 9 de tamaño.
+        /// </summary>
+        public void llenarTextBoxes8()
+        {
+            // Llenar el arreglo de textBoxes cuando son 10 campos.
+            textBoxes[0] = textBox1;
+            textBoxes[1] = textBox2;
+            textBoxes[2] = textBox3;
+            textBoxes[3] = textBox4;
+            textBoxes[4] = textBox5;
+            textBoxes[5] = textBox6;
+            textBoxes[6] = textBox7;
+            textBoxes[7] = textBox8;
+        }
+
+        /// <summary>
+        /// Método que llenta el arreglo de text boxes cuando este tiene 9 de tamaño.
+        /// </summary>
+        public void llenarTextBoxes9()
+        {
+            // Llenar el arreglo de textBoxes cuando son 10 campos.
+            textBoxes[0] = textBox1;
+            textBoxes[1] = textBox2;
+            textBoxes[2] = textBox3;
+            textBoxes[3] = textBox4;
+            textBoxes[4] = textBox5;
+            textBoxes[5] = textBox6;
+            textBoxes[6] = textBox7;
+            textBoxes[7] = textBox8;
+            textBoxes[8] = textBox9;
+        }
+
+        /// <summary>
+        /// Método que llenta el arreglo de text boxes cuando este tiene 10 de tamaño.
+        /// </summary>
+        public void llenarTextBoxes10()
+        {
+            // Llenar el arreglo de textBoxes cuando son 10 campos.
+            textBoxes[0] = textBox1;
+            textBoxes[1] = textBox2;
+            textBoxes[2] = textBox3;
+            textBoxes[3] = textBox4;
+            textBoxes[4] = textBox5;
+            textBoxes[5] = textBox6;
+            textBoxes[6] = textBox7;
+            textBoxes[7] = textBox8;
+            textBoxes[8] = textBox9;
+            textBoxes[9] = textBox10;
+        }
+
+        /// <summary>
+        /// Método que llenta el arreglo de text boxes cuando este tiene 10 de tamaño.
+        /// </summary>
+        public void llenarTextBoxes11()
+        {
+            // Llenar el arreglo de textBoxes cuando son 10 campos.
+            textBoxes[0] = textBox1;
+            textBoxes[1] = textBox2;
+            textBoxes[2] = textBox3;
+            textBoxes[3] = textBox4;
+            textBoxes[4] = textBox5;
+            textBoxes[5] = textBox6;
+            textBoxes[6] = textBox7;
+            textBoxes[7] = textBox8;
+            textBoxes[8] = textBox9;
+            textBoxes[9] = textBox10;
+            textBoxes[10] = textBox11;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
