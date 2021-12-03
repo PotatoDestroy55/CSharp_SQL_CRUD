@@ -23,6 +23,7 @@ namespace Crud_TBD
         private MySqlCommand comando = new MySqlCommand();
         MySqlDataReader leerFilas;
         private TextBox[] textBoxes;
+        private string[] campos;
 
         // Seleccionadores de los procedimientos
         private string seleccionConsulta;
@@ -34,7 +35,48 @@ namespace Crud_TBD
         {
             InitializeComponent();
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            // Preparar la conexión para así tener el comando
+            comando.Connection = conectador.getConnection();
+            conexión = conectador.getConnection();
+
+            // Conseguir el tipo de guardado que se selecciono
+            comando.CommandText = seleccionGuardar;
+
+            // Setear al comando como lo que se recibio, es decir un procedimiento almacenado.
+            comando.CommandType = CommandType.StoredProcedure;
+
+            // Meter los datos al procedimiento
+            for (int i = 0; i < campos.Length; i++)
+            {
+                comando.Parameters.AddWithValue(campos[i], textBoxes[i].Text);
+            }
+
+            // Ejecutar el procedimiento y guardar si se puedo ejecutar
+            int respuesta = comando.ExecuteNonQuery();
+
+            if (respuesta > 0)
+            {
+                // si se ejecuto entonces es mayor a 0 y si se guardaron los datos.
+                MessageBox.Show("Los datos han sido guardados");
+            }
+            else
+                MessageBox.Show("Error no se han guardado los datos!");
+
+            // refrescar la vista de la tabla.
+            mostrarTabla();
+
+            // Limpiar los parametros
+            comando.Parameters.Clear();
+        }
+
         /// <summary>
         /// Método que actualiza algun campo seleccioando de la tabla.
         /// </summary>
@@ -42,7 +84,38 @@ namespace Crud_TBD
         /// <param name="e"></param>
         private void actualizar_Click(object sender, EventArgs e)
         {
-            System.Console.Write("prueba");
+            // Preparar la conexión para así tener el comando
+            comando.Connection = conectador.getConnection();
+            conexión = conectador.getConnection();
+
+            // Conseguir el tipo de consulta que se selecciono
+            comando.CommandText = seleccionActualizar;
+
+            // Setear al comando como lo que se recibio, es decir un procedimiento almacenado.
+            comando.CommandType = CommandType.StoredProcedure;
+
+            // Meter los datos al procedimiento
+            for (int i = 0; i < campos.Length; i++)
+            {
+                comando.Parameters.AddWithValue(campos[i], textBoxes[i].Text);
+            }
+
+            // Ejecutar el procedimiento y guardar si se puedo ejecutar
+            int respuesta = comando.ExecuteNonQuery();
+
+            if (respuesta > 0)
+            {
+                // si se ejecuto entonces es mayor a 0 y si se guardaron los datos.
+                MessageBox.Show("Los datos han sido actualizados");
+            }
+            else
+                MessageBox.Show("Error no se han actualizados los datos!");
+
+            // refrescar la vista de la tabla.
+            mostrarTabla();
+
+            // Limpiar los parametros
+            comando.Parameters.Clear();
         }
 
        /// <summary>
@@ -102,12 +175,26 @@ namespace Crud_TBD
                     // Crear el arreglo de textBoxes correspondiente al tamaño de Libros
                     textBoxes = new TextBox[10];
 
+                    // Asignarle el tamaño al arreglo de campos.
+                    campos = new string[10];
+
+                    campos[0] = "p_Id_libro";
+                    campos[1] = "p_ISBD_libro";
+                    campos[2] = "p_Titulo_Libro";
+                    campos[3] = "p_Nombre_Autor_Libro";
+                    campos[4] = "p_Pimer_Apellido_Autor_Libro";
+                    campos[5] = "p_Segundo_Apellido_Autor_Libro";
+                    campos[6] = "p_Fecha_Pub_Libro";
+                    campos[7] = "p_Editorial_Libro";
+                    campos[8] = "p_Edicion_Libro";
+                    campos[9] = "p_Genero_Libro";
+
                     // Llenar el arreglo con su respectivo tamaño
                     llenarTextBoxes10();
 
                     // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla libros.
                     seleccionConsulta = "consultaLibros";
-                    seleccionGuardar = "insertarLibros";
+                    seleccionGuardar = "altaLibros";
                     seleccionActualizar = "modificarLibros";
                     seleccionarEliminar = "bajaLibros";
 
@@ -143,13 +230,28 @@ namespace Crud_TBD
                     // Crear el arreglo de textBoxes correspondiente al tamaño de Revistas
                     textBoxes = new TextBox[11];
 
+                    // Asignarle el tamaño al arreglo de campos.
+                    campos = new string[11];
+
+                    campos[0] = "p_Id_Revista";
+                    campos[1] = "p_ISBN_Revista";
+                    campos[2] = "p_Nombre_Revista";
+                    campos[3] = "p_Anio_Revista";
+                    campos[4] = "p_Editorial_Revista";
+                    campos[5] = "p_2Ciudad_Revista";
+                    campos[6] = "p_Volumen_Revista";
+                    campos[7] = "p_Numero_Revista";
+                    campos[8] = "p_Nombre_Autor_Revista";
+                    campos[9] = "p_Primer_Apellido_Autor_Revista";
+                    campos[10] = "p_Segundo_Apellido_Autor_Revista";
+
                     llenarTextBoxes11();
 
                     System.Console.WriteLine("Se selecciono: " + seleccionTabla);
 
                     // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla revistas.
                     seleccionConsulta = "consultaRevistas";
-                    seleccionGuardar = "insertarRevistas";
+                    seleccionGuardar = "altaRevistas";
                     seleccionActualizar = "modificarRevistas";
                     seleccionarEliminar = "bajaRevistas";
 
@@ -161,14 +263,14 @@ namespace Crud_TBD
                 case "Investigaciones":
                     // Colocar las etiquetas con su respectivo campo
                     label1.Text = "Id";
-                    label2.Text = "ISBD";
+                    label2.Text = "Fecha";
                     label3.Text = "Nombre";
-                    label4.Text = "Año";
-                    label5.Text = "Editorial";
-                    label6.Text = "Ciudad";
-                    label7.Text = "Volumen";
-                    label8.Text = "Numero";
-                    label9.Text = "Autor";
+                    label4.Text = "Tema";
+                    label5.Text = "Autor";
+                    label6.Text = "Primer Apellido";
+                    label7.Text = "Segundo Apellido";
+                    label8.Text = "Edicion";
+                    label9.Text = "Finalizacion";
 
                     // Desaparecer el label 10 y 11 junto los campos de texto.
                     label10.Visible = false;
@@ -183,11 +285,24 @@ namespace Crud_TBD
                     // Crear el arreglo de textBoxes correspondiente al tamaño de Revistas
                     textBoxes = new TextBox[9];
 
+                    // Asignarle el tamaño al arreglo de campos.
+                    campos = new string[9];
+
+                    campos[0] = "p_Id_Investigacion";
+                    campos[1] = "p_Fecha_Investigacion";
+                    campos[2] = "p_Nombre_Investigacion";
+                    campos[3] = "p_Tema_Investigacion";
+                    campos[4] = "p_Nombre_Autor_Principal";
+                    campos[5] = "p_Apellido_Paterno_Autor_Principal";
+                    campos[6] = "p_Apellido_Materno_Autor_Principal";
+                    campos[7] = "p_Edicion_Investigacion,Fecha_Terminacion_Investigacion";
+                    campos[8] = "p_Fecha_Terminacion_Investigacion";
+
                     llenarTextBoxes9();
 
                     // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla Investigaciones.
                     seleccionConsulta = "consultaInvestigaciones";
-                    seleccionGuardar = "insertarInvestigaciones";
+                    seleccionGuardar = "altaInvestigaciones";
                     seleccionActualizar = "modificarInvestigaciones";
                     seleccionarEliminar = "bajaInvestigaciones";
 
@@ -219,11 +334,23 @@ namespace Crud_TBD
                     // Crear el arreglo de textBoxes correspondiente al tamaño de Revistas
                     textBoxes = new TextBox[8];
 
+                    // Asignarle el tamaño al arreglo de campos.
+                    campos = new string[8];
+
+                    campos[0] = "p_Id_Software";
+                    campos[1] = "p_Nombre_Software";
+                    campos[2] = "p_Empresa_Software";
+                    campos[3] = "p_Desarrollador_Principal";
+                    campos[4] = "p_Fecha_Lanzamiento";
+                    campos[5] = "p_Version_Software";
+                    campos[6] = "p_Tipo_Software";
+                    campos[7] = "p_Compatibilidad_SO ";
+
                     llenarTextBoxes8();
 
                     // Colocar los valores que se deben usar para poder mostrar, insertar, actualizar y eliminar en la tabla Investigaciones.
                     seleccionConsulta = "consultaSoftware";
-                    seleccionGuardar = "insertarSoftware";
+                    seleccionGuardar = "altaSoftware";
                     seleccionActualizar = "modificarSoftware";
                     seleccionarEliminar = "bajaSoftware";
 
@@ -270,6 +397,28 @@ namespace Crud_TBD
 
             conexión.Close();
 
+        }
+
+        /// <summary>
+        /// Método que selecciona la fila
+        /// </summary>
+        public void seleccionarFila()
+        {
+            // conseguir la fila selecionada.
+            var fila = dataGridView1.CurrentRow;
+
+
+            // Siempre hacer individual el ID.
+             int id = Convert.ToInt32(fila.Cells[0].Value);
+            textBoxes[0].Text = id.ToString();
+
+            // Poner los datos seleccionados despues del ID.
+            for (int i = 1; i < campos.Length; i ++)
+            {
+                // Coloar el texto dependiendo en que tenga.
+                textBoxes[i].Text = fila.Cells[i].Value.ToString();
+                System.Console.WriteLine( fila.Cells[i].Value.ToString() );
+            }
         }
 
         /// <summary>
@@ -364,6 +513,11 @@ namespace Crud_TBD
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            seleccionarFila();
         }
     }
 }
